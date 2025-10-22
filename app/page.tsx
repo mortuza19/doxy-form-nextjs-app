@@ -26,6 +26,7 @@ function Landing(): JSX.Element {
 
   // Centralized function to handle scrolling
   function scrollToSection(ref: React.RefObject<HTMLDivElement | null>) {
+    console.log('Scrolling to section:', ref);
     ref?.current?.scrollIntoView({
       behavior: 'smooth', // Optional: Adds smooth scrolling
       block: 'start',      // Scrolls to the top of the element
@@ -46,16 +47,16 @@ function Landing(): JSX.Element {
           <Box mb={10}>
             <ProblemSolutionSectionOnly />
           </Box>
-          <Box my={10}>
+          <Box ref={featureRef} my={10}>
             <CoreFeatures />
           </Box>
           <Box my={10}>
             <HowItWorksSection />
           </Box>
-          <Box my={10}>
+          <Box ref={demoRef} my={10}>
             <DemoSection />
           </Box>
-          <Box my={10}>
+          <Box ref={pricingRef} my={10}>
             <Pricing />
           </Box>
           <Box my={10}>
@@ -69,7 +70,7 @@ function Landing(): JSX.Element {
           <CTABanner />
         </Box>
       </Container>
-      <Box>
+      <Box ref={contactRef}>
         <Footer />
       </Box>
     </>
