@@ -3,17 +3,17 @@ import { useRef, type JSX } from 'react';
 
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
-import Header from './components/Common/Header';
-import Hero from './components/Landing/Hero';
-import ProblemSolutionSectionOnly from './components/Landing/ProblemSolution';
-import CoreFeatures from './components/Landing/CoreFeatures';
-import HowItWorksSection from './components/Landing/HowItWork';
-import Pricing from './components/Landing/Pricing';
-import FAQSection from './components/Landing/FAQSection';
-import UserReview from './components/Landing/UserReview';
-import CTABanner from './components/Landing/CTABanner';
-import Footer from './components/Common/Footer';
-import DemoSection from './components/Landing/DemoSection';
+import Header from '../components/Common/Header';
+import Hero from '../components/Landing/Hero';
+import ProblemSolutionSectionOnly from '../components/Landing/ProblemSolution';
+import CoreFeatures from '../components/Landing/CoreFeatures';
+import HowItWorksSection from '../components/Landing/HowItWork';
+import Pricing from '../components/Landing/Pricing';
+import FAQSection from '../components/Landing/FAQSection';
+import UserReview from '../components/Landing/UserReview';
+import CTABanner from '../components/Landing/CTABanner';
+import Footer from '../components/Common/Footer';
+import DemoSection from '../components/Landing/DemoSection';
 
 
 
@@ -26,7 +26,6 @@ function Landing(): JSX.Element {
 
   // Centralized function to handle scrolling
   function scrollToSection(ref: React.RefObject<HTMLDivElement | null>) {
-    console.log('Scrolling to section:', ref);
     ref?.current?.scrollIntoView({
       behavior: 'smooth', // Optional: Adds smooth scrolling
       block: 'start',      // Scrolls to the top of the element

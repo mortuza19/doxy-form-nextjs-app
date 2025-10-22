@@ -1,26 +1,4 @@
 import type { Metadata } from "next";
-import { NextIntlClientProvider } from "next-intl";
-import { Geist, Geist_Mono, Inter } from "next/font/google";
-
-import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
-
-import "./globals.css";
-import { StyledRoot } from "./styledRoot";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -32,19 +10,5 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-    <html lang="en">
-      <body
-        className={`${inter.variable} ${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <AppRouterCacheProvider>
-          <StyledRoot>
-            <NextIntlClientProvider>
-              {children}
-            </NextIntlClientProvider>
-          </StyledRoot>
-        </AppRouterCacheProvider>
-      </body>
-    </html>
-  );
+  return (children);
 }
