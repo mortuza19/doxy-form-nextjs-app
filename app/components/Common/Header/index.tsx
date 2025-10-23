@@ -13,6 +13,8 @@ import {
   Menu,
   MenuItem,
   styled,
+  useScrollTrigger,  // Add this
+  Slide,             // Add this
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
@@ -35,6 +37,21 @@ const NavButton = styled(Button)(({ theme }) => ({
     color: theme.palette.text.primary,
   },
 }));
+
+// Add HideOnScroll component
+interface HideOnScrollProps {
+  children: React.ReactElement;
+}
+
+function HideOnScroll({ children }: HideOnScrollProps) {
+  const trigger = useScrollTrigger();
+
+  return (
+    <Slide appear={false} direction="down" in={!trigger}>
+      {children}
+    </Slide>
+  );
+}
 
 function Header({ demoRef, featureRef, pricingRef, contactRef, scrollToSection }: HeaderProps): JSX.Element {
   const t = useTranslations();
@@ -77,95 +94,97 @@ function Header({ demoRef, featureRef, pricingRef, contactRef, scrollToSection }
   ];
 
   return (
-    <AppBar
-      position="sticky"
-      color="default"
-      elevation={0}
-      sx={{
-        backgroundColor: (theme) => theme.palette.background.paper,
-        borderRadius: 0,
-        boxShadow: "0px 1px 3px rgba(0, 0, 0, 0.1)",
-      }}
-    >
-      <Toolbar sx={{ justifyContent: "space-between", py: 1 }}>
-        {/* Logo */}
-        <Box display='flex' alignItems='center' gap={1}>
-          <Image
-            src="logo.svg"
-            alt={t("header__doxa_logo_alt")}
-            width={36}
-            height={36}
-          />
-          <Typography variant="h6" component="div" sx={{ fontWeight: 700 }}>
-            {t("header__company_name")}
-          </Typography>
-        </Box>
+    <HideOnScroll>
+      <AppBar
+        position="fixed" // Change from "sticky" to "fixed"
+        color="default"
+        elevation={0}
+        sx={{
+          backgroundColor: (theme) => theme.palette.background.paper,
+          borderRadius: 0,
+          boxShadow: "0px 1px 3px rgba(0, 0, 0, 0.1)",
+        }}
+      >
+        <Toolbar sx={{ justifyContent: "space-between", py: 1, boxSizing: "border-box" }}>
+          {/* Logo */}
+          <Box display='flex' alignItems='center' gap={1}>
+            <Image
+              src="logo.svg"
+              alt={t("header__doxa_logo_alt")}
+              width={36}
+              height={36}
+            />
+            <Typography variant="h6" component="div" sx={{ fontWeight: 700 }}>
+              {t("header__company_name")}
+            </Typography>
+          </Box>
 
-        {/* Desktop Navigation */}
-        <Box
-          sx={{
-            display: { xs: "none", md: "flex" },
-            gap: 2,
-            alignItems: "center",
-          }}
-        >
-          <NavButton onClick={() => scrollToSection(featureRef)}>{t("header__feature")}</NavButton>
-          <NavButton onClick={() => scrollToSection(demoRef)}>{t("header__demo")}</NavButton>
-          <NavButton onClick={() => scrollToSection(pricingRef)}>{t("header__pricing")}</NavButton>
-          <NavButton onClick={() => scrollToSection(contactRef)}>{t("header__contact")}</NavButton>
-        </Box>
+          {/* Desktop Navigation */}
+          <Box
+            sx={{
+              display: { xs: "none", md: "flex" },
+              gap: 2,
+              alignItems: "center",
+            }}
+          >
+            <NavButton onClick={() => scrollToSection(featureRef)}>{t("header__feature")}</NavButton>
+            <NavButton onClick={() => scrollToSection(demoRef)}>{t("header__demo")}</NavButton>
+            <NavButton onClick={() => scrollToSection(pricingRef)}>{t("header__pricing")}</NavButton>
+            <NavButton onClick={() => scrollToSection(contactRef)}>{t("header__contact")}</NavButton>
+          </Box>
 
-        <Box
-          sx={{
-            display: { xs: "none", md: "flex" },
-            gap: 2,
-            alignItems: "center",
-          }}
-        >
-          <NavButton>{t("header__login")}</NavButton>
-          <Button variant="contained" endIcon={<ArrowForwardIcon />}>
-            {t("header__start_trial")}
-          </Button>
-        </Box>
-
-        {/* Mobile Menu Icon */}
-        <IconButton
-          aria-label={t("header__open_menu")}
-          onClick={handleMenuOpen}
-          sx={{ display: { xs: "inline-flex", md: "none" } }}
-        >
-          <MenuIcon />
-        </IconButton>
-
-        {/* Mobile Menu */}
-        <Menu
-          anchorEl={anchorEl}
-          open={open}
-          onClose={handleMenuClose}
-          anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
-          transformOrigin={{ vertical: "top", horizontal: "right" }}
-        >
-          {menuItems.map((item) => (
-            <MenuItem key={item.section} onClick={() => {
-              scrollToSection(item.ref!);
-              handleMenuClose();
-            }}>
-              {item.label}
-            </MenuItem>
-          ))}
-          <MenuItem>
-            <Button
-              fullWidth
-              variant="contained"
-              endIcon={<ArrowForwardIcon />}
-              onClick={handleMenuClose}
-            >
+          <Box
+            sx={{
+              display: { xs: "none", md: "flex" },
+              gap: 2,
+              alignItems: "center",
+            }}
+          >
+            <NavButton>{t("header__login")}</NavButton>
+            <Button variant="contained" endIcon={<ArrowForwardIcon />}>
               {t("header__start_trial")}
             </Button>
-          </MenuItem>
-        </Menu>
-      </Toolbar>
-    </AppBar>
+          </Box>
+
+          {/* Mobile Menu Icon */}
+          <IconButton
+            aria-label={t("header__open_menu")}
+            onClick={handleMenuOpen}
+            sx={{ display: { xs: "inline-flex", md: "none" } }}
+          >
+            <MenuIcon />
+          </IconButton>
+
+          {/* Mobile Menu */}
+          <Menu
+            anchorEl={anchorEl}
+            open={open}
+            onClose={handleMenuClose}
+            anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+            transformOrigin={{ vertical: "top", horizontal: "right" }}
+          >
+            {menuItems.map((item) => (
+              <MenuItem key={item.section} onClick={() => {
+                scrollToSection(item.ref!);
+                handleMenuClose();
+              }}>
+                {item.label}
+              </MenuItem>
+            ))}
+            <MenuItem>
+              <Button
+                fullWidth
+                variant="contained"
+                endIcon={<ArrowForwardIcon />}
+                onClick={handleMenuClose}
+              >
+                {t("header__start_trial")}
+              </Button>
+            </MenuItem>
+          </Menu>
+        </Toolbar>
+      </AppBar>
+    </HideOnScroll>
   );
 }
 
