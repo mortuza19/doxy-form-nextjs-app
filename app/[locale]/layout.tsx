@@ -1,13 +1,11 @@
 import { notFound } from "next/navigation";
 import { Locale, hasLocale, NextIntlClientProvider } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
 import { clsx } from "clsx";
 import { Inter } from "next/font/google";
 
 import { routing } from "@/i18n/routing";
-import { StyledRoot } from "../styledRoot";
-import '../globals.css';
+import "../globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -46,13 +44,7 @@ export default async function LocaleLayout({
   return (
     <html className="h-full" lang={locale}>
       <body className={clsx(inter.className, "flex h-full flex-col")}>
-        <NextIntlClientProvider>
-          <AppRouterCacheProvider>
-            <StyledRoot>
-              {children}
-            </StyledRoot>
-          </AppRouterCacheProvider>
-        </NextIntlClientProvider>
+        <NextIntlClientProvider>{children}</NextIntlClientProvider>
       </body>
     </html>
   );

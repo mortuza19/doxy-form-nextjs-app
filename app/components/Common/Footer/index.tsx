@@ -1,4 +1,3 @@
-'use client';
 import type { JSX } from 'react';
 import { useTranslations } from 'next-intl';
 
@@ -14,7 +13,7 @@ export default function Footer(): JSX.Element {
           justifyContent="space-between"
           alignItems="center"
           spacing={2}
-          sx={{ py: 3 }}
+          className="py-6"
         >
           <Typography variant="body2" color="text.secondary">
             © {new Date().getFullYear()} {t('footer__doxa_it_solutions')}
