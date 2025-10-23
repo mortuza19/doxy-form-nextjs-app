@@ -100,13 +100,9 @@ function Header(): JSX.Element {
         position="fixed"
         color="default"
         elevation={0}
-        sx={{
-          backgroundColor: (theme) => theme.palette.background.paper,
-          borderRadius: 0,
-          boxShadow: "0px 1px 3px rgba(0, 0, 0, 0.1)",
-        }}
+        className="bg-white rounded-none shadow-sm"
       >
-        <Toolbar sx={{ justifyContent: "space-between", py: 1, boxSizing: "border-box" }}>
+        <Toolbar className="justify-between py-2 box-border">
           {/* Logo */}
           <Box display='flex' alignItems='center' gap={2}>
             <Image
@@ -115,18 +111,16 @@ function Header(): JSX.Element {
               width={36}
               height={36}
             />
-            <Typography variant="h6" component="div" sx={{ fontWeight: 700 }}>
+            <Typography className="font-bold" variant="h6" component="div">
               {t("header__company_name")}
             </Typography>
           </Box>
 
           {/* Desktop Navigation */}
           <Box
-            sx={{
-              display: { xs: "none", md: "flex" },
-              gap: 2,
-              alignItems: "center",
-            }}
+            alignItems="center"
+            gap={2} 
+            sx={{display: { xs: "none", md: "flex" }}}
           >
             {
               menuItems.slice(0, 4).map((item) => (
@@ -136,11 +130,9 @@ function Header(): JSX.Element {
           </Box>
 
           <Box
-            sx={{
-              display: { xs: "none", md: "flex" },
-              gap: 2,
-              alignItems: "center",
-            }}
+            alignItems="center"
+            gap={2}
+            sx={{display: { xs: "none", md: "flex" }}}
           >
             <NavButton>{t("header__login")}</NavButton>
             <Button variant="contained" endIcon={<ArrowForwardIcon />}>

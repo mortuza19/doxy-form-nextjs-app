@@ -6,7 +6,7 @@ import { Box, Container, Typography, Link, Stack } from '@mui/material';
 export default function Footer(): JSX.Element {
   const t = useTranslations();
   return (
-    <Box component="footer" sx={{ bgcolor: 'grey.50', borderTop: '1px solid', borderColor: 'grey.200', mt: 4 }}>
+    <Box component="footer" className='bg-gray-50 border-t border-gray-200 mt-8'>
       <Container maxWidth="xl">
         <Stack
           direction={{ xs: 'column', sm: 'row' }}

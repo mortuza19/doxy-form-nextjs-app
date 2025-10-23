@@ -54,7 +54,7 @@ export interface Step {
   description: string;
 }
 
-type FeatureIcon = OverridableComponent<SvgIconTypeMap<object, "svg">> & {
+export type FeatureIcon = OverridableComponent<SvgIconTypeMap<object, "svg">> & {
   muiName: string;
 };
 

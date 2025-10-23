@@ -1,4 +1,3 @@
-'use client';
 import type { JSX } from "react";
 import { useTranslations } from "next-intl";
 
@@ -8,27 +7,20 @@ import {
   Grid,
   Card,
   CardContent,
-  useTheme,
-  lighten,
 } from "@mui/material";
 
 import { CORE_FEATURES, METRICS_DATA } from "@/app/data/Landing";
 import { FeatureItem } from "@/app/models/Landing";
 import { Metric } from "@/app/models/Landing";
+import CoreFeatureIcon from "./CoreFeatureIcon";
 
 function MetricCard({ data }: { data: Metric }): JSX.Element {
   return (
     <Card
       elevation={0}
-      sx={{
-        padding: 3,
-        textAlign: "center",
-        height: "100%",
-        border: "1px solid #e0e0e0",
-        borderRadius: "8px",
-      }}
+      className="p-6 text-center h-full border rounded-lg border-gray-200"
     >
-      <Typography variant="h3" color="success" sx={{ mb: 1.5 }}>
+      <Typography variant="h3" color="success" className="mb-3">
         {data.percentage}
       </Typography>
       <Typography variant="subtitle1" color="text.secondary">
@@ -39,42 +31,24 @@ function MetricCard({ data }: { data: Metric }): JSX.Element {
 }
 
 function FeatureCard({ item }: { item: FeatureItem }): JSX.Element {
-  const theme = useTheme();
   const Icon = item.icon; // The icon component from the data
 
   return (
     <Card
       elevation={0}
       variant="outlined"
-      sx={{
-        height: "100%", // Ensure all cards in the row are the same height
-        boxShadow: "0 4px 12px rgba(0, 0, 0, 0.05)", // Subtle shadow
-        borderRadius: 2,
-        p: 2, // Padding inside the card
-        "&:hover": {
-          boxShadow: "0 8px 20px rgba(0, 0, 0, 0.1)", // Slightly raised on hover
-        },
-      }}
+      className="h-full shadow-[0_4px_12px_rgba(0,0,0,0.05)] rounded-lg p-4 hover:shadow-[0_8px_20px_rgba(0,0,0,0.1)] transition-shadow"
     >
-      <CardContent sx={{ p: "16px" }}>
+      <CardContent className="p-4 pb-6">
         {" "}
         {/* Override MUI default CardContent padding */}
-        <Box sx={{ display: "flex", alignItems: "center", mb: 1.5 }}>
-          {/* Icon */}
-          <Icon
-            sx={{
-              fontSize: 24,
-              color: theme.palette.success.main, // Use primary color for icons
-              mr: 1.5,
-              p: 0.5,
-              borderRadius: "50%",
-              bgcolor: lighten(theme.palette.success.main, 0.9), // Light background for icon
-            }}
-          />
+        <Box display="flex" alignItems="center" mb={1.5}>
+          {/* Icon */}  
+          <CoreFeatureIcon Icon={Icon}/>
           {/* Title */}
           <Typography
             variant="h5"
-            sx={{ color: theme.palette.text.primary }}
+            color="text.primary"
           >
             {item.title}
           </Typography>
@@ -97,7 +71,7 @@ function CoreFeatures(): JSX.Element {
   return (
     <Box>
       {/* Header Section */}
-      <Box sx={{ textAlign: "center", mb: 6 }}>
+      <Box textAlign="center" mb={6}>
         <Typography variant="h2" gutterBottom>
           {t('core_feature__headline')}
         </Typography>
