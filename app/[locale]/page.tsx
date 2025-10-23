@@ -1,5 +1,4 @@
-'use client';
-import { useRef, type JSX } from 'react';
+import { type JSX } from 'react';
 
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
@@ -18,44 +17,25 @@ import DemoSection from '../components/Landing/DemoSection';
 
 
 function Landing(): JSX.Element {
-  // Create refs for the elements you want to scroll to
-  const featureRef = useRef<HTMLDivElement>(null);
-  const demoRef = useRef<HTMLDivElement>(null);
-  const pricingRef = useRef<HTMLDivElement>(null);
-  const contactRef = useRef<HTMLDivElement>(null);
-
-  // Centralized function to handle scrolling
-  function scrollToSection(ref: React.RefObject<HTMLDivElement | null>) {
-    ref?.current?.scrollIntoView({
-      behavior: 'smooth', // Optional: Adds smooth scrolling
-      block: 'start',      // Scrolls to the top of the element
-    });
-  };
   return (
     <>
-      <Header
-        scrollToSection={scrollToSection}
-        featureRef={featureRef}
-        demoRef={demoRef}
-        pricingRef={pricingRef}
-        contactRef={contactRef}
-      />
+      <Header />
       <Container className='pt-16' role="main" maxWidth="xl" disableGutters>
         <Hero />
         <Container>
           <Box mb={10}>
             <ProblemSolutionSectionOnly />
           </Box>
-          <Box ref={featureRef} my={10}>
+          <Box id="featureRef" my={10}>
             <CoreFeatures />
           </Box>
           <Box my={10}>
             <HowItWorksSection />
           </Box>
-          <Box ref={demoRef} my={10}>
+          <Box id="demoRef" my={10}>
             <DemoSection />
           </Box>
-          <Box ref={pricingRef} my={10}>
+          <Box id="pricingRef" my={10}>
             <Pricing />
           </Box>
           <Box my={10}>
@@ -69,7 +49,7 @@ function Landing(): JSX.Element {
           <CTABanner />
         </Box>
       </Container>
-      <Box ref={contactRef}>
+      <Box id="contactRef">
         <Footer />
       </Box>
     </>

@@ -12,21 +12,12 @@ import {
   Box,
   Menu,
   MenuItem,
-  styled,
   useScrollTrigger,  // Add this
-  Slide,             // Add this
+  Slide,
+  styled,           // Add this
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-
-// Define the expected props
-interface HeaderProps {
-  scrollToSection: (ref: React.RefObject<HTMLDivElement | null>) => void;
-  featureRef: React.RefObject<HTMLDivElement | null>;
-  demoRef: React.RefObject<HTMLDivElement | null>;
-  pricingRef: React.RefObject<HTMLDivElement | null>;
-  contactRef: React.RefObject<HTMLDivElement | null>;
-}
 
 const NavButton = styled(Button)(({ theme }) => ({
   color: theme.palette.text.primary,
@@ -53,7 +44,7 @@ function HideOnScroll({ children }: HideOnScrollProps) {
   );
 }
 
-function Header({ demoRef, featureRef, pricingRef, contactRef, scrollToSection }: HeaderProps): JSX.Element {
+function Header(): JSX.Element {
   const t = useTranslations();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -61,29 +52,39 @@ function Header({ demoRef, featureRef, pricingRef, contactRef, scrollToSection }
   const handleMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
+
   const handleMenuClose = () => {
     setAnchorEl(null);
+  };
+
+  const scrollToSection = (refId: string | null) => {
+    if (refId) {
+      const element = document.getElementById(refId);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }
   };
 
   const menuItems = [
     {
       section: 'feature',
-      ref: featureRef,
+      ref: 'featureRef',
       label: t("header__feature"),
     },
     {
       section: 'demo',
-      ref: demoRef,
+      ref: 'demoRef',
       label: t("header__demo"),
     },
     {
       section: 'pricing',
-      ref: pricingRef,
+      ref: 'pricingRef',
       label: t("header__pricing"),
     },
     {
       section: 'contact',
-      ref: contactRef,
+      ref: 'contactRef',
       label: t("header__contact"),
     },
     {
@@ -96,7 +97,7 @@ function Header({ demoRef, featureRef, pricingRef, contactRef, scrollToSection }
   return (
     <HideOnScroll>
       <AppBar
-        position="fixed" // Change from "sticky" to "fixed"
+        position="fixed"
         color="default"
         elevation={0}
         sx={{
@@ -127,10 +128,11 @@ function Header({ demoRef, featureRef, pricingRef, contactRef, scrollToSection }
               alignItems: "center",
             }}
           >
-            <NavButton onClick={() => scrollToSection(featureRef)}>{t("header__feature")}</NavButton>
-            <NavButton onClick={() => scrollToSection(demoRef)}>{t("header__demo")}</NavButton>
-            <NavButton onClick={() => scrollToSection(pricingRef)}>{t("header__pricing")}</NavButton>
-            <NavButton onClick={() => scrollToSection(contactRef)}>{t("header__contact")}</NavButton>
+            {
+              menuItems.slice(0, 4).map((item) => (
+                <NavButton onClick={() => scrollToSection(item.ref)} key={item.section}>{item.label}</NavButton>
+              ))
+            }
           </Box>
 
           <Box
