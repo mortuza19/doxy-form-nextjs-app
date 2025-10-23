@@ -40,7 +40,7 @@ function Landing(): JSX.Element {
         pricingRef={pricingRef}
         contactRef={contactRef}
       />
-      <Container role="main" maxWidth="xl" disableGutters>
+      <Container className='pt-16' role="main" maxWidth="xl" disableGutters>
         <Hero />
         <Container>
           <Box mb={10}>

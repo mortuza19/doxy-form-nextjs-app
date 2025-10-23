@@ -7,6 +7,7 @@ import { Inter } from "next/font/google";
 
 import { routing } from "@/i18n/routing";
 import { StyledRoot } from "../styledRoot";
+import '../globals.css';
 
 const inter = Inter({ subsets: ["latin"] });
 

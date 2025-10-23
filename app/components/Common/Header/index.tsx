@@ -107,7 +107,7 @@ function Header({ demoRef, featureRef, pricingRef, contactRef, scrollToSection }
       >
         <Toolbar sx={{ justifyContent: "space-between", py: 1, boxSizing: "border-box" }}>
           {/* Logo */}
-          <Box display='flex' alignItems='center' gap={1}>
+          <Box display='flex' alignItems='center' gap={2}>
             <Image
               src="logo.svg"
               alt={t("header__doxa_logo_alt")}
