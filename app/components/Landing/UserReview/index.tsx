@@ -1,8 +1,7 @@
-'use client';
 import type { JSX } from "react";
+
 import Image from "next/image";
 import { useTranslations } from "next-intl";
-
 import { Box, Card, CardContent, Grid, Typography } from "@mui/material";
 import FormatQuoteOutlinedIcon from "@mui/icons-material/FormatQuoteOutlined";
 
@@ -19,15 +18,8 @@ function UserReview(): JSX.Element {
         <Grid container spacing={2} my={4}>
           {USER_REVIEWS.map((review) => (
             <Grid size={{ xs: 12, md: 4 }} key={review.user}>
-              <Card variant="outlined" sx={{ p: 2, height: "100%" }}>
-                <CardContent
-                  sx={{
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: 2,
-                    height: "100%",
-                  }}
-                >
+              <Card variant="outlined" className="p-4 h-full">
+                <CardContent className="flex flex-col gap-4 h-full">
                   <FormatQuoteOutlinedIcon
                     sx={{ fontSize: 24, color: "success.main" }}
                   />

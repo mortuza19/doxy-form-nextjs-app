@@ -22,28 +22,17 @@ function DemoSection(): JSX.Element {
   return (
     <Box
       maxWidth="xl"
-      sx={{
-        display: "flex",
-        gap: 4,
-        alignItems: "center",
-        margin: "0 auto",
-        flexDirection: { xs: "column", md: "row" },
-      }}
+      display="flex"
+      gap={4}
+      alignItems="center"
+      margin="0 auto"
+      flexDirection={{ xs: "column", md: "row" }}
     >
       {/* --- Left: Video Placeholder --- */}
       <Paper
         elevation={0}
-        sx={{
-          flex: 1,
-          aspectRatio: "16/9",
-          minWidth: 340,
-          backgroundColor: "secondary.dark", // Light grey background
-          borderRadius: "8px",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          cursor: "pointer",
-        }}
+        sx={{ backgroundColor: "secondary.dark" }}
+        className="flex-1 aspect-video min-w-[340px] rounded-lg flex justify-center items-center cursor-pointer"
         onClick={handleOpen} // Open modal when clicking the placeholder
       >
         <IconButton
@@ -64,11 +53,11 @@ function DemoSection(): JSX.Element {
         <Typography variant="h2" gutterBottom>
           {t('demoSection__headline')}
         </Typography>
-        <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
+        <Typography variant="body2" color="text.secondary" className="mb-6">
           {t('demoSection__subheadline')}
         </Typography>
 
-        <Box sx={{ display: "flex", gap: 2, justifyContent: { xs: "center", md: "flex-start" } }}>
+        <Box display="flex" gap={2} justifyContent={{ xs: "center", md: "flex-start" }}>
           <Button
             variant="contained"
             startIcon={<WatchLaterIcon />}
@@ -84,7 +73,7 @@ function DemoSection(): JSX.Element {
           <Button
             variant="text"
             sx={{
-              backgroundColor: (theme) => theme.palette.background.paper,
+              backgroundColor: 'background.paper',
               boxShadow:
                 "0 4px 12px rgba(0, 0, 0, 0.15), 0 2px 6px rgba(0, 0, 0, 0.1)",
             }}
@@ -96,7 +85,9 @@ function DemoSection(): JSX.Element {
       </Box>
 
       {/* --- Video Modal --- */}
-      <VideoModal open={open} handleClose={handleClose} videoId={videoId} />
+      {
+        open && <VideoModal open={open} handleClose={handleClose} videoId={videoId} />
+      }
     </Box>
   );
 }

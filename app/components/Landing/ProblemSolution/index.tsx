@@ -1,23 +1,21 @@
-'use client';
-
 import { type JSX } from 'react';
+
+import { useTranslations } from 'next-intl';
 import {
   Box,
   Typography,
   Grid,
   Card,
   CardContent,
-  useTheme,
   List,
   ListItem,
   ListItemIcon,
   ListItemText,
 } from '@mui/material';
-
 import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
 import AutoGraphRoundedIcon from '@mui/icons-material/AutoGraphRounded';
-import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
-import { useTranslations } from 'next-intl';
+
+import { HeaderIcon, ListIcon } from './ProblemIcons';
 
 interface ProblemSolutionCardProps {
   icon: React.ElementType;
@@ -27,23 +25,13 @@ interface ProblemSolutionCardProps {
 }
 
 function ProblemSolutionCard({ data: { icon: Icon, title, points, color }}: { data: ProblemSolutionCardProps}) {
-  const theme = useTheme();
-  const iconColor = color === 'error' ? theme.palette.error.main : theme.palette.success.dark;
-  const ListIcon = color === 'error' ? AutoGraphRoundedIcon : CheckCircleOutlineIcon;
-
   return (
     <Card
-      sx={{
-        height: '100%',
-        boxShadow: '0 4px 12px rgba(0, 0, 0, 0.05)',
-        borderRadius: 2,
-        p: 1.5,
-      }}
-    >
-      <CardContent sx={{ p: '16px !important' }}>
+      className='h-full shadow-[0_4px_12px_rgba(0,0,0,0.05)] rounded-lg p-3'>
+      <CardContent className='p-4'>
         {/* Header (Icon and Title) */}
-        <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-          <Icon sx={{ fontSize: 24, color: iconColor, mr: 1 }} />
+        <Box display="flex" alignItems="center" mb={2}>
+          <HeaderIcon color={color} Icon={Icon} />
           <Typography variant="h6" component="h3" fontWeight={600} color="text.primary">
             {title}
           </Typography>
@@ -53,8 +41,8 @@ function ProblemSolutionCard({ data: { icon: Icon, title, points, color }}: { da
         <List sx={{ p: 0, '& .MuiListItem-root': { py: 0.5, px: 0 } }}>
           {points.map((point, index) => (
             <ListItem key={index} disableGutters>
-              <ListItemIcon sx={{ minWidth: '30px' }}>
-                <ListIcon sx={{ fontSize: 16, color: iconColor }} />
+              <ListItemIcon className='min-w-7.5'>
+                <ListIcon color={color} />
               </ListItemIcon>
               <ListItemText
                 primary={

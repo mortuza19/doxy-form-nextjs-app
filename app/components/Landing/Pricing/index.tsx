@@ -1,4 +1,3 @@
-'use client';
 import type { JSX } from 'react';
 import { useTranslations } from 'next-intl';
 
@@ -16,11 +15,11 @@ function Pricing(): JSX.Element {
   const t = useTranslations();
   return (
     <Box>
-      <Box component="section" sx={{ mb: 4 }}>
-        <Typography variant="h1" sx={{ textAlign: 'center' }}>
+      <Box component="section" mb={4}>
+        <Typography variant="h1" className='text-center'>
           {t('pricing__headline')}
         </Typography>
-        <Typography variant='body2' color='text.secondary' align='center' sx={{ mt: 1 }}>
+        <Typography variant='body2' color='text.secondary' align='center' mt={1}>
           {t('pricing__subheadline')}
         </Typography>
       </Box>
@@ -28,12 +27,12 @@ function Pricing(): JSX.Element {
         {PLANS.map((p, idx) => (
           <Grid size={{xs: 12, sm: 8, md: 4}} key={p.title}>
             <Paper elevation={1} sx={{ p: 3, minHeight: 220, border: idx === 1 ? '2px solid #2A56FF' : undefined }}>
-              <Typography variant="h4" sx={{ fontWeight: 700 }}>{p.title}</Typography>
-              <Typography variant="h3" sx={{ mt: 1 }}>{p.price}</Typography>
-              <Typography variant='body2' sx={{ color: 'text.secondary', mb: 2, mt: 1 }}>{p.subtitle}</Typography>
-              <Box component="ul" sx={{ pl: 1, m: 0 }}>
+              <Typography variant="h4" className='font-bold'>{p.title}</Typography>
+              <Typography variant="h3" mt={1}>{p.price}</Typography>
+              <Typography variant='body2' mb={2} mt={1} sx={{ color: 'text.secondary' }}>{p.subtitle}</Typography>
+              <Box component="ul" pl={1} m={0}>
                 {p.features.map(f => (
-                  <Box component="li" key={f.feature} sx={{ listStyle: 'none', display: 'flex', gap: 1, alignItems: 'center', mb: 1 }}>
+                  <Box component="li" key={f.feature} className='list-none' display="flex" gap={1} alignItems="center" mb={1}>
                     {
                       f.included ? <AddTaskRoundedIcon fontSize='small' sx={{ color: "success.dark" }} /> : <CancelRoundedIcon fontSize='small' sx={{ color: "error.main" }} />
                     }
@@ -41,7 +40,7 @@ function Pricing(): JSX.Element {
                   </Box>
                 ))}
               </Box>
-              <Button variant='contained' sx={{ py: 0.5, mt: 2 }}>
+              <Button variant='contained' className='py-1 mt-4'>
                 {t('pricing__select')}
               </Button>
             </Paper>

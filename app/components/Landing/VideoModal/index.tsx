@@ -1,5 +1,6 @@
-import { useEffect, useRef, type JSX } from 'react';
-import { Dialog, DialogContent, Box } from '@mui/material';
+"use client";
+import { useEffect, useRef, type JSX } from "react";
+import { Dialog, DialogContent, Box } from "@mui/material";
 
 // --- Types ---
 interface VideoModalProps {
@@ -10,14 +11,18 @@ interface VideoModalProps {
 
 // --- Component ---
 
-function VideoModal({ open, handleClose, videoId }: VideoModalProps): JSX.Element {
+function VideoModal({
+  open,
+  handleClose,
+  videoId,
+}: VideoModalProps): JSX.Element {
   const videoPlayerRef = useRef<HTMLIFrameElement>(null);
 
   // Function to stop the video when the modal closes
   const stopVideo = () => {
     if (videoPlayerRef.current) {
       // Setting the iframe source to empty effectively stops playback and closes the connection
-      videoPlayerRef.current.src = ''; 
+      videoPlayerRef.current.src = "";
     }
   };
 
@@ -25,7 +30,7 @@ function VideoModal({ open, handleClose, videoId }: VideoModalProps): JSX.Elemen
   useEffect(() => {
     if (!open) {
       // Give a slight delay to ensure the stop command is processed after the dialog closes
-      const timer = setTimeout(stopVideo, 300); 
+      const timer = setTimeout(stopVideo, 300);
       return () => clearTimeout(timer);
     }
   }, [open]);
@@ -34,33 +39,26 @@ function VideoModal({ open, handleClose, videoId }: VideoModalProps): JSX.Elemen
   const embedSrc = `https://www.youtube.com/embed/${videoId}?autoplay=1&modestbranding=1&rel=0`;
 
   return (
-    <Dialog
-      open={open}
-      onClose={handleClose}
-      maxWidth="md"
-      fullWidth
-    >
-      <DialogContent sx={{ padding: 0, overflow: 'hidden' }}>
-        <Box 
-            // 16:9 Aspect Ratio container for the video player
-            sx={{ 
-                position: 'relative', 
-                paddingTop: '56.25%', // 9 / 16 * 100%
-                height: 0,
-                backgroundColor: '#000'
-            }}
+    <Dialog open={open} onClose={handleClose} maxWidth="md" fullWidth>
+      <DialogContent className="p-0 overflow-hidden">
+        <Box
+          // 16:9 Aspect Ratio container for the video player
+          position="relative"
+          pt="56.25%"
+          height={0}
+          bgcolor="black"
         >
           <iframe
             ref={videoPlayerRef}
             title="Doxa Form Demo Video Player"
             width="100%"
             height="100%"
-            src={open ? embedSrc : ''} // Only load the video when 'open' is true
+            src={open ? embedSrc : ""} // Only load the video when 'open' is true
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
             style={{
-              position: 'absolute',
+              position: "absolute",
               top: 0,
               left: 0,
               border: 0,
@@ -70,6 +68,6 @@ function VideoModal({ open, handleClose, videoId }: VideoModalProps): JSX.Elemen
       </DialogContent>
     </Dialog>
   );
-};
+}
 
 export default VideoModal;

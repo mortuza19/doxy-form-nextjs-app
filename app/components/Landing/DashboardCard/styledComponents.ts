@@ -1,3 +1,4 @@
+'use client';
 import { Box, Card, styled, Typography } from "@mui/material";
 
 import { Status } from "@/app/models/Landing";

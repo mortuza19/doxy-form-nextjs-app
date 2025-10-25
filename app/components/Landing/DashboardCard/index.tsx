@@ -1,19 +1,16 @@
-'use client';
 import { type JSX } from "react";
 import { useTranslations } from "next-intl";
 
-import { Card, CardContent, Typography, Box, Button } from "@mui/material";
-import { lighten } from "@mui/system";
+import { Card, CardContent, Typography, Box } from "@mui/material";
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
 
 import {
   StatBox,
   StatLabel,
-  StatusItem,
-  StatusText,
   StatValue,
 } from "./styledComponents";
 import { FORM_SECTIONS, STATS } from "@/app/data/Landing";
+import DashboardCardSection from "./DashboardCardSection";
 
 function DoxaFormDashboardCard(): JSX.Element {
   const t = useTranslations();
@@ -24,7 +21,7 @@ function DoxaFormDashboardCard(): JSX.Element {
     >
       {/* CARD HEADER */}
       <Box display="flex" gap={1} alignItems="center" mb={1}>
-        <NoteAltIcon sx={{ height: "1.125rem", width: "1.125rem", color: '#2A56FF' }} />
+        <NoteAltIcon className="h-4.5 w-4.5" sx={{ color: 'success.main' }} />
         <Typography variant="h4" component="div">
           {t("dashboard__headline")}
         </Typography>
@@ -40,60 +37,7 @@ function DoxaFormDashboardCard(): JSX.Element {
             gap: { xs: 2, md: 0 },
           }}
         >
-          {FORM_SECTIONS.map((section, index) => (
-            <Card
-              key={section.title}
-              variant="outlined"
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                flexGrow: 1,
-                padding: 2,
-                marginRight: index < FORM_SECTIONS.length - 1 ? 2 : 0,
-                width: { xs: "100%" },
-              }}
-            >
-              <Typography variant="body2" fontWeight="bold" mb={1}>
-                {section.title}
-              </Typography>
-
-              <Box
-                display="flex"
-                flexDirection="column"
-                gap={1}
-                justifyContent="space-between"
-                flexGrow={1}
-              >
-                <Box>
-                  {section.items.map((item) => (
-                    <StatusItem key={item.name}>
-                      <Typography variant="body2" sx={{ fontWeight: 500 }}>
-                        {item.name}
-                      </Typography>
-                      <StatusText variant="body2" status={item.status}>
-                        {item.status}
-                      </StatusText>
-                    </StatusItem>
-                  ))}
-                </Box>
-
-                <Button
-                  variant="text"
-                  fullWidth
-                  sx={{
-                    mt: 1,
-                    paddingY: 0.5,
-                    backgroundColor: (theme) =>
-                      lighten(theme.palette.text.secondary, 0.9),
-                    fontWeight: 500,
-                    fontFamily: "inherit",
-                  }}
-                >
-                  {section.buttonText}
-                </Button>
-              </Box>
-            </Card>
-          ))}
+          {FORM_SECTIONS.map((section, index) => (<DashboardCardSection key={section.title} section={section} index={index} />))}
         </Box>
 
         {/* STATS SECTION - Dynamic Rendering */}

@@ -1,5 +1,3 @@
-'use client';
-
 import type { JSX } from "react";
 import { useTranslations } from "next-intl";
 
@@ -11,16 +9,15 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
 import DoxaFormDashboardCard from "../DashboardCard";
 
-
 function Hero(): JSX.Element {
   const t = useTranslations();
 
   return (
     <Box
       component="section"
+      px={{ xs: 1, md: 3 }}
+      py={{ xs: 6, md: 12 }}
       sx={{
-        px: { xs: 1, md: 3 },
-        py: { xs: 6, md: 12 },
         bgcolor: "background.default",
       }}
     >
@@ -29,14 +26,12 @@ function Hero(): JSX.Element {
           <Typography
             variant="h1"
             sx={{
-              fontSize: { xs: "1.75rem", md: "2.75rem", "lg": "3.5rem" },
+              fontSize: { xs: "1.75rem", md: "2.75rem", lg: "3.5rem" },
               fontWeight: 800,
               textAlign: { xs: "center", md: "inherit" },
             }}
           >
-            <span style={{ color: "#556270" }}>
-              {t("hero__h1")}
-            </span>
+            <span style={{ color: "#556270" }}>{t("hero__h1")}</span>
             <span style={{ color: "#454F5A" }}>{t("hero__h2")}</span>
             <span style={{ color: "#416EFF" }}>{t("hero__h3")}</span>
             <span style={{ color: "#39424B" }}>{t("hero__h4")}</span>
@@ -70,8 +65,9 @@ function Hero(): JSX.Element {
               variant="text"
               sx={{
                 px: { md: "2rem" },
-                backgroundColor: (theme) => theme.palette.background.paper,
-                boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15), 0 2px 6px rgba(0, 0, 0, 0.1)',
+                backgroundColor: 'background.paper',
+                boxShadow:
+                  "0 4px 12px rgba(0, 0, 0, 0.15), 0 2px 6px rgba(0, 0, 0, 0.1)",
               }}
               endIcon={<PlayCircleOutlineIcon />}
             >
@@ -81,7 +77,7 @@ function Hero(): JSX.Element {
         </Grid>
 
         <Grid size={{ xs: 12, md: 6 }}>
-            <DoxaFormDashboardCard />
+          <DoxaFormDashboardCard />
         </Grid>
       </Grid>
     </Box>
